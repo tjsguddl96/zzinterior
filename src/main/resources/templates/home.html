@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>홈페이지</title>
+</head>
+<body>
+<h1>홈페이지</h1>
+
+<!-- 로그인 상태 체크 -->
+<div th:if="${userName != null}">
+  <p>안녕하세요, <span th:text="${userName}"></span>님!</p>
+  <a href="/logout">로그아웃</a>
+</div>
+
+<!-- 비로그인 상태 -->
+<div th:if="${userName == null}">
+  <p>로그인하지 않았습니다.</p>
+  <a href="/oauth2/authorization/google">구글 로그인</a>
+</div>
+</body>
+</html>

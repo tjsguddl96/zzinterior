@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: zzinterior
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://mySqlTest:3306/dbTest?userSSL=false
+    url: jdbc:mysql://localhost:3306/dbTest
+    username : ${DB_PASSWORD}
+    password : ${DB_USERNAME}
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        show_sql: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
+jwt:
+  key: ${JWT_SECRET_KEY}

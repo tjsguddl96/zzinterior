@@ -56,4 +56,7 @@ $ docker restart zzinterior
 
 #-- 컨테이너 삭제하기
 $ docker rm -f zzinterior
+
+#-- mysql 컨테이너 실행
+$ docker run -d --name 컨테이너이름 -e MYSQL_ROOT_PASSWORD=비밀번호 -p 3306:3306 이미지이름
 ```
