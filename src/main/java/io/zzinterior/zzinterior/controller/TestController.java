@@ -30,7 +30,6 @@ public class TestController {
         }
         if (principalDetails != null) {
             model.addAttribute("userName", principalDetails.getUser().getName());
-            System.out.println(principalDetails.getUser().getName());
         } else {
             model.addAttribute("userName", null);
         }
@@ -40,6 +39,7 @@ public class TestController {
     // 로그인 성공 후 리다이렉션
     @GetMapping("/auth/success")
     public String loginSuccess() {
+        System.out.println("리다이렉트");
         return "redirect:/";
     }
 }

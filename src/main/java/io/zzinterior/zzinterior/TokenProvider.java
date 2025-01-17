@@ -38,7 +38,10 @@ public class TokenProvider {
     }
 
     public String generateAccessToken(Authentication authentication){
-        return generateToken(authentication,ACCESS_TOKEN_EXPIRE_TIME);
+        String token=generateToken(authentication,ACCESS_TOKEN_EXPIRE_TIME);
+        System.out.println("token은 "+token);
+//        return generateToken(authentication,ACCESS_TOKEN_EXPIRE_TIME);
+        return token;
     }
 
     //refresh token 발급
@@ -52,7 +55,7 @@ public class TokenProvider {
         String authorities=authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining());
-
+        System.out.println("generate Token!!!!");
         return Jwts.builder()
                 .subject(authentication.getName())
                 .claim(KEY_ROLE,authorities)
@@ -92,10 +95,8 @@ public class TokenProvider {
 
     public boolean validateToken(String token){
         if(!StringUtils.hasText(token)){
-            System.out.println("여인가?!@?");
             return false;
         }
-        System.out.println("여기는?");
         Claims claims=parseClaims(token);
         return claims.getExpiration().after(new Date());
     }
@@ -112,4 +113,5 @@ public class TokenProvider {
             throw new JwtException("Invalid JWT signature", e);
         }
     }
+
 }

@@ -24,10 +24,9 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String accessToken=resolveToken(request);
-        System.out.println("여긴가?!");
+        System.out.println("accessToken : "+accessToken);
         //accessToken검증
         if(tokenProvider.validateToken(accessToken)){
-            System.out.println("여긴?");
             setAuthentication(accessToken);
         }
         else{
@@ -49,6 +48,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     }
     private String resolveToken(HttpServletRequest request){
         String token=request.getHeader(AUTHORIZATION);
+        System.out.println(token+"!!!");
         if(ObjectUtils.isEmpty(token)||!token.startsWith(TokenKey.TOKEN_PREFIX)){
             return null;
         }
